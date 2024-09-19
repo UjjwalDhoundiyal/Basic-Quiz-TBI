@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            height: 100%;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 1%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .container>div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div style="border: none; background-color: white;">
+            <h1>Attempt all the Questions:-</h1>
+            <p>Score: <span id="score">0</span>/50</p>
+        </div>
+
+        <div id="Q1">
+            <h1>Full form of HTML?</h1>
+            <button id="q11" onclick="answer(1, true, 'q11')">HyperText Markup Language</button>
+            <button id="q12" onclick="answer(1, false, 'q12')">HyperText Machine Learning</button>
+        </div>
+
+        <div id="Q2">
+            <h1>Full form of CSS?</h1>
+            <button id="q21" onclick="answer(2, true, 'q21')">Cascading Style Sheets</button>
+            <button id="q22" onclick="answer(2, false, 'q22')">Computer Style Sheets</button>
+        </div>
+
+        <div id="Q3">
+            <h1>What does HTTP stand for?</h1>
+            <button id="q31" onclick="answer(3, true, 'q31')">HyperText Transfer Protocol</button>
+            <button id="q32" onclick="answer(3, false, 'q32')">HyperText Transport Program</button>
+        </div>
+
+        <div id="Q4">
+            <h1>Which one is a programming language?</h1>
+            <button id="q41" onclick="answer(4, true, 'q41')">Python</button>
+            <button id="q42" onclick="answer(4, false, 'q42')">HTML</button>
+        </div>
+
+        <div id="Q5">
+            <h1>Rate this Site?</h1>
+            <button id="q51" onclick="answer(5, false, 'q51')">3 Star</button>
+            <button id="q52" onclick="answer(5, true, 'q52')">5 Star</button>
+        </div>
+
+    </div>
+
+
+    <script>
+        let totalScore = 0;
+        const answered = {};
+
+        function answer(questionId, isCorrect, buttonId) {
+            if (answered[questionId]) return;
+            answered[questionId] = true;
+
+            document.querySelectorAll(`#Q${questionId} button`).forEach(button => {
+                button.classList.add('disabled');
+                button.disabled = true;
+            });
+
+            const selectedButton = document.getElementById(buttonId);
+            if (isCorrect) {
+                selectedButton.style.backgroundColor = 'green';
+                totalScore += 10;
+            } else {
+                selectedButton.style.backgroundColor = 'red';
+            }
+
+            document.getElementById('score').innerText = totalScore;
+        }
+
+    </script>
+
+</body>
+
+</html>
